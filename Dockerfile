@@ -7,7 +7,7 @@ yum clean all --disableplugin=subscription-manager -y && \
 echo "Hello from the httpd-parent container!" > ${DOCROOT}/index.html
 # Allows child images to inject their own content into DocumentRoot
 ONBUILD COPY src/ ${DOCROOT}/
-EXPOSE 80
+EXPOSE 8080
 # This stuff is needed to ensure a clean start
 RUN rm -rf /run/httpd && mkdir /run/httpd
 # Run as the root user
