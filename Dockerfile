@@ -1,9 +1,13 @@
-FROM registry.access.redhat.com/ubi8/ubi:8.0
+FROM alpine:latest
 
 # DocumentRoot for Apache
 ENV DOCROOT=/var/www/html
-RUN yum install -y --no-docs --disableplugin=subscription-manager httpd && \
-yum clean all --disableplugin=subscription-manager -y && \
+
+RUN apk update \
+  && apk update apache2 \
+  && apk add curl \
+  && sed -i 's/Listen 80/Listen 8080/g' /etc/apache2/httpd.conf
+  
 echo "Hello from the httpd-parent container!" > ${DOCROOT}/index.html
 # Allows child images to inject their own content into DocumentRoot
 ONBUILD COPY src/ ${DOCROOT}/
@@ -13,4 +17,4 @@ RUN rm -rf /run/httpd && mkdir /run/httpd
 # Run as the root user
 USER root
 # Launch httpd
-CMD /usr/sbin/httpd
+CMD /usr/sbin/httpd -DFOREGROUND
