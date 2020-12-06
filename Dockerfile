@@ -8,7 +8,7 @@ RUN apk update \
   && apk add curl \
   && sed -i 's/Listen 80/Listen 8080/g' /etc/apache2/httpd.conf
   
-echo "Hello from the httpd-parent container!" > ${DOCROOT}/index.html
+RUN echo "Hello from the httpd-parent container!" > ${DOCROOT}/index.html
 # Allows child images to inject their own content into DocumentRoot
 ONBUILD COPY src/ ${DOCROOT}/
 EXPOSE 80
