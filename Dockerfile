@@ -11,8 +11,8 @@ RUN apk update \
   && chmod g+xrw  /var/www/logs/
 
 # Allows child images to inject their own content into DocumentRoot
-ONBUILD COPY src/ ${DOCR /var/www/logs/error.logOOT}/
-EXPOSE 80
+ONBUILD COPY src/ ${DOCROOT} / 
+EXPOSE 8080
 # This stuff is needed to ensure a clean start
 RUN rm -rf /run/httpd && mkdir /run/httpd
 # Run as the root user
