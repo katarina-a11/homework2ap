@@ -4,7 +4,7 @@ FROM alpine:latest
 ENV DOCROOT=/var/www/html
 
 RUN apk update \
-  && apk update apache2 \
+  && apk add apache2 \
   && apk add curl \
   && sed -i 's/Listen 80/Listen 8080/g' /etc/apache2/httpd.conf
   
@@ -17,4 +17,4 @@ RUN rm -rf /run/httpd && mkdir /run/httpd
 # Run as the root user
 USER root
 # Launch httpd
-CMD /usr/sbin/httpd -DFOREGROUND
+CMD /usr/sbin/httpd -D FOREGROUND
