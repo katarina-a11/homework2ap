@@ -3,10 +3,10 @@ FROM alpine:latest
 # DocumentRoot for Apache
 ENV DOCROOT=/var/www/html
 
-RUN apk update \
-  && apk update apache2 \
-  && apk add curl \
-  && sed -i 's/Listen 80/Listen 8080/g' /etc/apache2/httpd.conf
+RUN apk update 
+RUN apk update apache2 
+RUN apk add curl 
+RUN sed -i 's/Listen 80/Listen 8080/g' /etc/apache2/httpd.conf
   
 echo "Hello from the httpd-parent container!" > ${DOCROOT}/index.html
 # Allows child images to inject their own content into DocumentRoot
